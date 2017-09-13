@@ -168,6 +168,7 @@ namespace SonarQube.TeamBuild.PreProcessor
                         }
 
                         var active = actives[r["key"].ToString()];
+                        this.logger.LogDebug($"Accessing active with key [{r["key"].ToString()}] (count: [{active?.Count()}]) for active rule with RepoKey [{activeRule.RepoKey}], RuleKey [{activeRule.RuleKey}], InternalKey [{activeRule.InternalKey}], TemplateKey [{activeRule.TemplateKey}] ");
                         var listParams = active.Single()["params"].Children<JObject>();
                         activeRule.Parameters = listParams.ToDictionary(pair => pair["key"].ToString(), pair => pair["value"].ToString());
                         if (activeRule.Parameters.ContainsKey("CheckId"))
